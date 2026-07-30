@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-export default function ProductDetails() {
-  return <h1>Product Details Page</h1>;
-}
-=======
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext.jsx';
@@ -37,7 +32,9 @@ function ProductDetails() {
       <div className="container product-details-missing">
         <h2>Product not found</h2>
         <p>The product you're looking for doesn't exist or may have been removed.</p>
-        <Link to="/products" className="btn btn-primary">Back to Products</Link>
+        <Link to="/products" className="btn btn-primary">
+          Back to Products
+        </Link>
       </div>
     );
   }
@@ -75,7 +72,10 @@ function ProductDetails() {
           </div>
 
           <div className="product-details-price-row">
-            <span className="product-details-price">₹{product.price.toLocaleString('en-IN')}</span>
+            <span className="product-details-price">
+              ₹{product.price.toLocaleString('en-IN')}
+            </span>
+
             {discount > 0 && (
               <>
                 <span className="product-details-original-price">
@@ -86,7 +86,11 @@ function ProductDetails() {
             )}
           </div>
 
-          <p className={`product-details-availability ${product.availability === 'In Stock' ? 'is-instock' : 'is-low'}`}>
+          <p
+            className={`product-details-availability ${
+              product.availability === 'In Stock' ? 'is-instock' : 'is-low'
+            }`}
+          >
             {product.availability}
           </p>
 
@@ -96,6 +100,7 @@ function ProductDetails() {
             <button className="btn btn-accent" onClick={handleAddToCart}>
               {added ? 'Added ✓' : 'Add to Cart'}
             </button>
+
             <button className="btn btn-primary" onClick={handleBuyNow}>
               Buy Now
             </button>
@@ -107,4 +112,3 @@ function ProductDetails() {
 }
 
 export default ProductDetails;
->>>>>>> 4ff4200c6dd726ed94a558b4bdc604012afcf19f
