@@ -1,0 +1,81 @@
+.hero-banner {
+  background: linear-gradient(120deg, var(--color-primary) 0%, #1a5fd0 60%, #143f99 100%);
+  color: #fff;
+  margin-bottom: var(--space-6);
+}
+
+.hero-banner-inner {
+  padding: var(--space-8) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.hero-copy {
+  max-width: 520px;
+}
+
+.hero-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-accent-yellow);
+  margin-bottom: var(--space-4);
+}
+
+.hero-title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: var(--space-4);
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: var(--space-6);
+  line-height: 1.6;
+}
+
+.hero-cta {
+  padding: 14px 34px;
+  font-size: 15px;
+}
+
+.hero-badges {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.hero-badge {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  min-width: 160px;
+  backdrop-filter: blur(2px);
+}
+
+.hero-badge-value {
+  display: block;
+  font-size: 20px;
+  font-weight: 800;
+  font-family: var(--font-display);
+}
+
+.hero-badge-label {
+  display: block;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: var(--space-1);
+}
+
+@media (max-width: 640px) {
+  .hero-banner-inner {
+    padding: var(--space-6) var(--space-4);
+  }
+}
