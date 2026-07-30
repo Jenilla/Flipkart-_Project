@@ -1,0 +1,36 @@
+.product-section {
+  padding: var(--space-7) 0;
+}
+
+.product-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.product-section-title {
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.product-section-subtitle {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-top: var(--space-1);
+}
+
+.product-section-viewall {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.product-section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-5);
+}
