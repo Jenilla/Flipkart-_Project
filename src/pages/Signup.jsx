@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-export default function Signup() {
-  return <h1>Signup Page</h1>;
-}
-=======
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -176,4 +171,3 @@ function Signup() {
 }
 
 export default Signup;
->>>>>>> 4ff4200c6dd726ed94a558b4bdc604012afcf19f

@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-export default function Products() {
-  return <h1>Products Page</h1>;
-}
-=======
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard.jsx';
@@ -169,4 +164,3 @@ function Products() {
 }
 
 export default Products;
->>>>>>> 4ff4200c6dd726ed94a558b4bdc604012afcf19f
