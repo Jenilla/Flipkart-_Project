@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-export default function Home() {
-  return <h1>Home Page</h1>;
-}
-=======
 import { useEffect, useState } from 'react';
 import CategoryBar from '../components/CategoryBar.jsx';
 import HeroBanner from '../components/HeroBanner.jsx';
@@ -63,4 +58,3 @@ function Home() {
 }
 
 export default Home;
->>>>>>> 4ff4200c6dd726ed94a558b4bdc604012afcf19f

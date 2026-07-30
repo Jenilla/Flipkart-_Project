@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-export default function NotFound() {
-  return <h1>404 - Page Not Found</h1>;
-}
-=======
 import { Link } from 'react-router-dom';
 
 function NotFound() {
@@ -31,4 +26,3 @@ function NotFound() {
 }
 
 export default NotFound;
->>>>>>> 4ff4200c6dd726ed94a558b4bdc604012afcf19f

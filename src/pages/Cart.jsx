@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-export default function Cart() {
-  return <h1>Cart Page</h1>;
-}
-=======
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext.jsx';
@@ -27,6 +22,7 @@ function Cart() {
     deliveryCharge,
     finalTotal,
   } = useCart();
+
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [placing, setPlacing] = useState(false);
   const [orderError, setOrderError] = useState('');
@@ -35,12 +31,16 @@ function Cart() {
   const handlePlaceOrder = async () => {
     setPlacing(true);
     setOrderError('');
+
     try {
       await placeOrderRequest();
       setOrderPlaced(true);
       await clearCart();
     } catch (error) {
-      setOrderError(error?.response?.data?.message || 'Could not place order. Please try again.');
+      setOrderError(
+        error?.response?.data?.message ||
+          'Could not place order. Please try again.'
+      );
     } finally {
       setPlacing(false);
     }
@@ -51,8 +51,15 @@ function Cart() {
       <div className="container cart-empty-state">
         <div className="cart-order-success">✓</div>
         <h2>Order placed successfully!</h2>
-        <p>Thank you for shopping with ShopKart. This is a demo checkout — no payment was processed.</p>
-        <button className="btn btn-primary" onClick={() => navigate('/products')}>
+        <p>
+          Thank you for shopping with ShopKart. This is a demo checkout — no
+          payment was processed.
+        </p>
+
+        <button
+          className="btn btn-primary"
+          onClick={() => navigate('/products')}
+        >
           Continue Shopping
         </button>
       </div>
@@ -63,8 +70,14 @@ function Cart() {
     return (
       <div className="container cart-empty-state">
         <h2>Your cart is empty</h2>
-        <p>Looks like you haven't added anything yet. Explore products and find something you like.</p>
-        <Link to="/products" className="btn btn-primary">Browse Products</Link>
+        <p>
+          Looks like you haven't added anything yet. Explore products and find
+          something you like.
+        </p>
+
+        <Link to="/products" className="btn btn-primary">
+          Browse Products
+        </Link>
       </div>
     );
   }
@@ -73,7 +86,9 @@ function Cart() {
     <div className="container cart-page">
       <div className="cart-items">
         <div className="cart-items-header">
-          <h1>My Cart ({totalItems} item{totalItems === 1 ? '' : 's'})</h1>
+          <h1>
+            My Cart ({totalItems} item{totalItems === 1 ? '' : 's'})
+          </h1>
         </div>
 
         {items.map((item) => (
@@ -88,7 +103,10 @@ function Cart() {
               </Link>
 
               <div className="cart-item-price-row">
-                <span className="cart-item-price">{formatINR(item.price)}</span>
+                <span className="cart-item-price">
+                  {formatINR(item.price)}
+                </span>
+
                 {item.originalPrice > item.price && (
                   <span className="cart-item-original-price">
                     {formatINR(item.originalPrice)}
@@ -99,20 +117,26 @@ function Cart() {
               <div className="cart-item-controls">
                 <div className="cart-quantity">
                   <button
-                    aria-label="Decrease quantity"
                     onClick={() => decreaseQuantity(item.id)}
+                    aria-label="Decrease quantity"
                   >
                     −
                   </button>
+
                   <span>{item.quantity}</span>
+
                   <button
-                    aria-label="Increase quantity"
                     onClick={() => increaseQuantity(item.id)}
+                    aria-label="Increase quantity"
                   >
                     +
                   </button>
                 </div>
-                <button className="cart-item-remove" onClick={() => removeFromCart(item.id)}>
+
+                <button
+                  className="cart-item-remove"
+                  onClick={() => removeFromCart(item.id)}
+                >
                   Remove
                 </button>
               </div>
@@ -127,26 +151,41 @@ function Cart() {
 
       <aside className="cart-summary">
         <h2>Price Details</h2>
+
         <div className="cart-summary-row">
-          <span>Price ({totalItems} item{totalItems === 1 ? '' : 's'})</span>
+          <span>
+            Price ({totalItems} item{totalItems === 1 ? '' : 's'})
+          </span>
           <span>{formatINR(totalPrice)}</span>
         </div>
+
         <div className="cart-summary-row">
           <span>Discount</span>
-          <span className="cart-summary-discount">− {formatINR(discount)}</span>
+          <span className="cart-summary-discount">
+            − {formatINR(discount)}
+          </span>
         </div>
+
         <div className="cart-summary-row">
           <span>Delivery Charges</span>
           <span className={deliveryCharge === 0 ? 'cart-summary-discount' : ''}>
             {deliveryCharge === 0 ? 'FREE' : formatINR(deliveryCharge)}
           </span>
         </div>
+
         <div className="cart-summary-divider" />
+
         <div className="cart-summary-row cart-summary-total">
           <span>Total Amount</span>
           <span>{formatINR(finalTotal)}</span>
         </div>
-        {orderError && <p className="auth-error" role="alert">{orderError}</p>}
+
+        {orderError && (
+          <p className="auth-error" role="alert">
+            {orderError}
+          </p>
+        )}
+
         <button
           className="btn btn-accent cart-place-order"
           onClick={handlePlaceOrder}
@@ -160,4 +199,3 @@ function Cart() {
 }
 
 export default Cart;
->>>>>>> 4ff4200c6dd726ed94a558b4bdc604012afcf19f

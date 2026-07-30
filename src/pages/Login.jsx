@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-export default function Login() {
-  return <h1>Login Page</h1>;
-}
-=======
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -32,6 +27,7 @@ function Login() {
   const location = useLocation();
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   const redirectTo = location.state?.from || '/';
 
@@ -39,8 +35,6 @@ function Login() {
     const { name, value } = event.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
-
-  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -127,4 +121,3 @@ function Login() {
 }
 
 export default Login;
->>>>>>> 4ff4200c6dd726ed94a558b4bdc604012afcf19f
