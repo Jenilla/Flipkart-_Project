@@ -1,64 +1,68 @@
-# ShopKart — Flipkart-Style E-commerce Frontend
+# ShopKart (Flipkart-clone) — Full Stack
 
-A complete, responsive e-commerce frontend built with **React + Vite**, using mock/local
-product data. No backend required — this is designed to be easy to wire up to a real
-API later (see `src/data/products.js`).
+A single project combining:
 
-## Tech Stack
+- **`server/`** — Express + SQLite (Sequelize) REST API
+- **`client/`** — React + Vite frontend
 
-- React 18 + Vite
-- React Router DOM v6
-- Context API (Cart + Auth)
-- Plain CSS (CSS variables for theming, no framework)
+Both live in this one folder and are wired together so the whole app can run
+as **one process on one port** — no separate frontend/backend servers or
+CORS configuration required to use the app.
 
-## Getting Started
+```
+flipkart-fullstack/
+├── client/        # React/Vite frontend
+├── server/        # Express/SQLite backend
+└── package.json   # root scripts that orchestrate both
+```
+
+## Quick Start (combined, single port — recommended)
 
 ```bash
-npm install
+npm run install-all   # installs both client/ and server/ dependencies
+cp server/.env.example server/.env
+npm start              # builds the React app, then serves API + UI together
+```
+
+Open **http://localhost:5000** — that's it, one URL for everything. On first
+run the backend also auto-creates the SQLite database and seeds 35 sample
+products.
+
+How this works: `npm start` first runs `vite build` inside `client/`
+(producing `client/dist`), then starts the Express server. The server serves
+`client/dist` as static files and answers `/api/*` requests itself, so the
+browser only ever talks to one origin — the frontend's `axios` baseURL is
+just `/api` (see `client/src/services/api.js`).
+
+## Alternative: Split Dev Mode (hot-reload frontend)
+
+If you're actively editing the frontend and want Vite's instant hot-reload
+instead of rebuilding on every change:
+
+```bash
+npm run install-all
+cp server/.env.example server/.env
 npm run dev
 ```
 
-Then open the URL Vite prints (usually `http://localhost:5173`).
+This starts both dev servers together via `concurrently`:
+- Backend on `http://localhost:5000` (nodemon, auto-restarts on changes)
+- Frontend on `http://localhost:5173` (Vite, instant hot-reload)
 
-To build for production:
+`client/vite.config.js` proxies any `/api/*` request from the Vite dev server
+to the backend on port 5000, so you still use `http://localhost:5173` in the
+browser and everything just works — same relative `/api` calls, no CORS
+setup needed on your part.
+
+## Other useful commands
 
 ```bash
-npm run build
-npm run preview
+npm run build   # just builds the frontend into client/dist
+npm run seed    # re-seed the product catalog (server/seed/seedProducts.js)
 ```
 
-## Project Structure
+## More details
 
-```
-src/
-  components/     Reusable UI: Navbar, CategoryBar, HeroBanner, ProductCard,
-                  ProductSection, Footer
-  context/        CartContext (cart state + totals), AuthContext (frontend-only
-                  login/signup/logout via localStorage)
-  data/           products.js — mock product catalog + category list
-  pages/          Home, Products, ProductDetails, Cart, Login, Signup, NotFound
-  App.jsx         Route definitions
-  main.jsx        App entry point, wraps providers + router
-```
-
-## Routes
-
-| Path            | Page            |
-| --------------- | --------------- |
-| `/`              | Home            |
-| `/products`      | Product listing (supports `?search=`, `?category=`, `?price=`) |
-| `/product/:id`   | Product details |
-| `/login`         | Login           |
-| `/signup`        | Signup          |
-| `/cart`          | Shopping cart   |
-
-## Notes
-
-- Authentication is **frontend-only** (localStorage), since there's no backend yet.
-  Replace `src/context/AuthContext.jsx` with real API calls once one exists.
-- Cart state persists in `localStorage` and recalculates totals safely (no `NaN`s).
-- Product images are placeholder images from picsum.photos — swap in real product
-  photography or a CDN when available.
-- Connecting to a backend later: replace the static `products` array in
-  `src/data/products.js` with a fetch call, and swap `AuthContext`'s localStorage
-  logic for real API requests. Component props/shapes are already API-ready.
+- Backend API reference, database design, and migration notes:
+  [`server/README.md`](./server/README.md)
+- Frontend-specific notes: [`client/README.md`](./client/README.md)
